@@ -1,2 +1,3 @@
-# go-demo
-Go demo
+# Go gRPC examples
+
+todo
