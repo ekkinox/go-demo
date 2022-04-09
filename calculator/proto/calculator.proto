@@ -3,11 +3,6 @@ syntax="proto3";
 package calculator;
 option go_package="github.com/ekkinox/go-grpc/calculator/proto/calculator";
 
-message Greeting {
-  string title = 1;
-  string name = 2;
-}
-
 message Request {
   int32 integer1 = 1;
   int32 integer2 = 2;
