@@ -14,6 +14,10 @@ github.com/cncf/xds/go v0.0.0-20211011173535-cb28da3451f1/go.mod h1:eXthEFrGJvWH
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/ekkinox/go-grpc v0.0.0-20220409183017-e6232846bc34 h1:/pQf5Wcsi/CAPw1L3eJN4OUdIwWenWvCmDs6faafxtg=
 github.com/ekkinox/go-grpc v0.0.0-20220409183017-e6232846bc34/go.mod h1:LwLl9+Yp1HI56OOaKrPQuOZoKVy8j52fni7DO0jvQ2U=
+github.com/ekkinox/go-grpc v0.0.0-20220409191643-d95599159138 h1:fG4HKBx40Og0F828hPvnBFXjp2BxnmabpilqY3ev2tc=
+github.com/ekkinox/go-grpc v0.0.0-20220409191643-d95599159138/go.mod h1:LwLl9+Yp1HI56OOaKrPQuOZoKVy8j52fni7DO0jvQ2U=
+github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220409193659-02382352257f h1:0hj9N6uTjbSsMN8K0DJuiZ6h4+bsr535uqub7fUteIQ=
+github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220409193659-02382352257f/go.mod h1:t0e31Oj+be4fqfT7dYquJC4tq+p5JlmwfVD1Ll59hv0=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
@@ -114,6 +118,8 @@ google.golang.org/protobuf v1.25.0/go.mod h1:9JNX74DMeImyA3h4bdi1ymwjUzf21/xIlba
 google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp09yW+WbY/TyQbw=
 google.golang.org/protobuf v1.26.0 h1:bxAC2xTBsZGibn2RTntX0oH50xLsqy1OxA9tTL3p/lk=
 google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
+google.golang.org/protobuf v1.28.0 h1:w43yiav+6bVFTBQFZX0r7ipe9JQ1QsbMgHwbBziscLw=
+google.golang.org/protobuf v1.28.0/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.3/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
