@@ -14,5 +14,5 @@ message Response {
 
 service CalculatorService{
   // Unary
-  rpc Greet(Request) returns (Response){};
+  rpc Sum(Request) returns (Response){};
 }
