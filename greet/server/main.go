@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
 	greetPb "github.com/ekkinox/go-grpc/greet/proto"
 	"google.golang.org/grpc"
@@ -19,11 +20,32 @@ func (*server) Greet(ctx context.Context, req *greetPb.GreetRequest) (*greetPb.G
 	title := req.GetGreeting().GetTitle()
 	name := req.GetGreeting().GetName()
 
-	fmt.Printf("received title %s and name %s\n", title, name)
+	fmt.Printf("Greet: received title %s and name %s\n", title, name)
 
 	return &greetPb.GreetResponse{
 		Result: fmt.Sprintf("Greetings %s %s!", title, name),
 	}, nil
+}
+
+func (*server) GreetManyTimes(req *greetPb.GreetManyTimesRequest, stream greetPb.GreetService_GreetManyTimesServer) error {
+
+	title := req.GetGreeting().GetTitle()
+	name := req.GetGreeting().GetName()
+
+	fmt.Printf("GreetManyTimes: received title %s and name %s\n", title, name)
+
+	for i := 0; i < 10; i++ {
+
+		resp := &greetPb.GreetManyTimesResponse{
+			Result: fmt.Sprintf("Greetings %s %s (#%d)", title, name, i),
+		}
+
+		stream.Send(resp)
+
+		time.Sleep(1 * time.Second)
+	}
+
+	return nil
 }
 
 func main() {

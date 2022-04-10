@@ -16,8 +16,14 @@ github.com/ekkinox/go-grpc v0.0.0-20220409183017-e6232846bc34 h1:/pQf5Wcsi/CAPw1
 github.com/ekkinox/go-grpc v0.0.0-20220409183017-e6232846bc34/go.mod h1:LwLl9+Yp1HI56OOaKrPQuOZoKVy8j52fni7DO0jvQ2U=
 github.com/ekkinox/go-grpc v0.0.0-20220409191643-d95599159138 h1:fG4HKBx40Og0F828hPvnBFXjp2BxnmabpilqY3ev2tc=
 github.com/ekkinox/go-grpc v0.0.0-20220409191643-d95599159138/go.mod h1:LwLl9+Yp1HI56OOaKrPQuOZoKVy8j52fni7DO0jvQ2U=
+github.com/ekkinox/go-grpc v0.0.0-20220409204556-97234390b761 h1:k7JLGrketmcG4Dseb43tninmXf3trwMiE/QmPXQzPe0=
+github.com/ekkinox/go-grpc v0.0.0-20220409204556-97234390b761/go.mod h1:LwLl9+Yp1HI56OOaKrPQuOZoKVy8j52fni7DO0jvQ2U=
 github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220409193659-02382352257f h1:0hj9N6uTjbSsMN8K0DJuiZ6h4+bsr535uqub7fUteIQ=
 github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220409193659-02382352257f/go.mod h1:t0e31Oj+be4fqfT7dYquJC4tq+p5JlmwfVD1Ll59hv0=
+github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220409204556-97234390b761 h1:jbaL6ap0nEe507skUZ+s63VcgpBPa4jSPUubEiBzq+E=
+github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220409204556-97234390b761/go.mod h1:t0e31Oj+be4fqfT7dYquJC4tq+p5JlmwfVD1Ll59hv0=
+github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220410120422-074034508dcf h1:QGUAhA1FH/4rjxIF20UUeBKaWv7UXvWA09aeqyNOQKA=
+github.com/ekkinox/go-grpc/greet/proto v0.0.0-20220410120422-074034508dcf/go.mod h1:t0e31Oj+be4fqfT7dYquJC4tq+p5JlmwfVD1Ll59hv0=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
