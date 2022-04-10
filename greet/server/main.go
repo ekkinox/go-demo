@@ -49,6 +49,32 @@ func (*server) GreetManyTimes(req *greetPb.GreetManyTimesRequest, stream greetPb
 	return nil
 }
 
+func (*server) GreetAll(stream greetPb.GreetService_GreetAllServer) error {
+
+	fmt.Printf("GreetAll: received RPC ... ")
+
+	for {
+		req, err := stream.Recv()
+
+		if err == io.EOF {
+			fmt.Printf("client is done sending\n")
+			return nil
+		}
+
+		if err != nil {
+			return err
+		}
+
+		err = stream.Send(&greetPb.GreetAllResponse{
+			Result: fmt.Sprintf("Greetings %s %s !\n", req.Greeting.Title, req.Greeting.Name),
+		})
+
+		if err != nil {
+			return err
+		}
+	}
+}
+
 func (*server) LongGreet(stream greetPb.GreetService_LongGreetServer) error {
 	fmt.Printf("LongGreet: received client stream")
 
