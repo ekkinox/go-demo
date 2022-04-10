@@ -133,7 +133,7 @@ func doFindMax(c calculatorPb.CalculatorServiceClient) {
 		stream.CloseSend()
 	}()
 
-	//reveivers
+	//receivers
 	go func() {
 		for {
 			resp, err := stream.Recv()
