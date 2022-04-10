@@ -22,7 +22,8 @@ func main() {
 
 	//doSum(c)
 	//doPrimeNumberDecomposition(c)
-	doComputeAverage(c)
+	//doComputeAverage(c)
+	doFindMax(c)
 }
 
 func doSum(c calculatorPb.CalculatorServiceClient) {
@@ -92,4 +93,65 @@ func doComputeAverage(c calculatorPb.CalculatorServiceClient) {
 
 	resp, err := stream.CloseAndRecv()
 	fmt.Printf("Average: %v", resp.Result)
+}
+
+func doFindMax(c calculatorPb.CalculatorServiceClient) {
+
+	stream, err := c.FindMax(context.Background())
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+
+	reqs := []*calculatorPb.FindMaxRequest{
+		{
+			Number: 1,
+		},
+		{
+			Number: 5,
+		},
+		{
+			Number: 3,
+		},
+		{
+			Number: 6,
+		},
+		{
+			Number: 2,
+		},
+		{
+			Number: 20,
+		},
+	}
+
+	wait := make(chan struct{})
+
+	//senders
+	go func() {
+		for _, req := range reqs {
+			stream.Send(req)
+		}
+		stream.CloseSend()
+	}()
+
+	//reveivers
+	go func() {
+		for {
+			resp, err := stream.Recv()
+
+			if err == io.EOF {
+				break
+			}
+
+			if err != nil {
+				close(wait)
+				log.Fatalf("error: %v", err)
+			}
+
+			log.Println(resp.Max)
+
+		}
+		close(wait)
+	}()
+
+	<-wait
 }

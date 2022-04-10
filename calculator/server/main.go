@@ -24,6 +24,36 @@ func (*server) Sum(ctx context.Context, req *calculatorPb.Request) (*calculatorP
 	}, nil
 }
 
+func (*server) FindMax(stream calculatorPb.CalculatorService_FindMaxServer) error {
+
+	max := int32(0)
+
+	for {
+		req, err := stream.Recv()
+
+		if err == io.EOF {
+			return nil
+		}
+
+		if err != nil {
+			log.Printf("error: %v", err)
+		}
+
+		if max < req.Number {
+
+			max = req.Number
+
+			err = stream.Send(&calculatorPb.FindMaxResponse{
+				Max: req.Number,
+			})
+
+			if err != nil {
+				return err
+			}
+		}
+	}
+}
+
 func (*server) PrimeNumberDecomposition(req *calculatorPb.PrimeNumberDecompositionRequest, stream calculatorPb.CalculatorService_PrimeNumberDecompositionServer) error {
 
 	number := req.GetNumber()
