@@ -3,11 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"io"
-	"log"
-
 	calculatorPb "github.com/ekkinox/go-grpc/calculator/proto"
 	"google.golang.org/grpc"
+	"io"
+	"log"
 )
 
 func main() {
@@ -22,7 +21,8 @@ func main() {
 	c := calculatorPb.NewCalculatorServiceClient(conn)
 
 	//doSum(c)
-	doPrimeNumberDecomposition(c)
+	//doPrimeNumberDecomposition(c)
+	doComputeAverage(c)
 }
 
 func doSum(c calculatorPb.CalculatorServiceClient) {
@@ -63,4 +63,33 @@ func doPrimeNumberDecomposition(c calculatorPb.CalculatorServiceClient) {
 	}
 
 	fmt.Printf("Client server streaming PrimeNumberDecomposition finished\n")
+}
+
+func doComputeAverage(c calculatorPb.CalculatorServiceClient) {
+	reqs := []*calculatorPb.ComputeAverageRequest{
+		{
+			Number: 1,
+		},
+		{
+			Number: 2,
+		},
+		{
+			Number: 3,
+		},
+		{
+			Number: 4,
+		},
+	}
+
+	stream, err := c.ComputeAverage(context.Background())
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+
+	for _, req := range reqs {
+		stream.Send(req)
+	}
+
+	resp, err := stream.CloseAndRecv()
+	fmt.Printf("Average: %v", resp.Result)
 }
