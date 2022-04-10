@@ -23,6 +23,27 @@ func (*server) Sum(ctx context.Context, req *calculatorPb.Request) (*calculatorP
 	}, nil
 }
 
+func (*server) PrimeNumberDecomposition(req *calculatorPb.PrimeNumberDecompositionRequest, stream calculatorPb.CalculatorService_PrimeNumberDecompositionServer) error {
+
+	number := req.GetNumber()
+
+	var k int32
+	k = 2
+
+	for number > 1 {
+		if number%k == 0 {
+			stream.Send(&calculatorPb.PrimeNumberDecompositionResponse{
+				Result: k,
+			})
+			number = number / k
+		} else {
+			k = k + 1
+		}
+	}
+
+	return nil
+}
+
 func main() {
 	fmt.Println("Starting gRPC server on :50052 ...")
 

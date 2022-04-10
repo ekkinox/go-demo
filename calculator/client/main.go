@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 
 	calculatorPb "github.com/ekkinox/go-grpc/calculator/proto"
@@ -20,7 +21,8 @@ func main() {
 
 	c := calculatorPb.NewCalculatorServiceClient(conn)
 
-	doSum(c)
+	//doSum(c)
+	doPrimeNumberDecomposition(c)
 }
 
 func doSum(c calculatorPb.CalculatorServiceClient) {
@@ -32,4 +34,33 @@ func doSum(c calculatorPb.CalculatorServiceClient) {
 	sum, _ := c.Sum(context.Background(), req)
 
 	fmt.Printf("Calculator result: %v", sum.Result)
+}
+
+func doPrimeNumberDecomposition(c calculatorPb.CalculatorServiceClient) {
+
+	req := &calculatorPb.PrimeNumberDecompositionRequest{
+		Number: 120,
+	}
+
+	stream, err := c.PrimeNumberDecomposition(context.Background(), req)
+	if err != nil {
+		log.Fatalf("Error during server streaming PrimeNumberDecomposition rpc call: %v", err)
+	}
+
+	for {
+		resp, err := stream.Recv()
+
+		if err == io.EOF {
+			//end of stream
+			break
+		}
+
+		if err != nil {
+			log.Fatalf("Error during server streaming PrimeNumberDecomposition rpc call: %v", err)
+		}
+
+		fmt.Printf("Client server streaming PrimeNumberDecomposition rpc response: %s\n", resp.Result)
+	}
+
+	fmt.Printf("Client server streaming PrimeNumberDecomposition finished\n")
 }

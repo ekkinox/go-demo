@@ -2,8 +2,10 @@ module github.com/ekkinox/go-grpc/calculator/server
 
 go 1.18
 
+replace github.com/ekkinox/go-grpc/calculator/proto => ../proto
+
 require (
-	github.com/ekkinox/go-grpc/calculator/proto v0.0.0-20220409202154-6847171c69ed
+	github.com/ekkinox/go-grpc/calculator/proto v0.0.0-20220410124615-1efc5a45b56a
 	google.golang.org/grpc v1.45.0
 )
 
@@ -13,5 +15,5 @@ require (
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd // indirect
 	golang.org/x/text v0.3.0 // indirect
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
-	google.golang.org/protobuf v1.26.0 // indirect
+	google.golang.org/protobuf v1.28.0 // indirect
 )
