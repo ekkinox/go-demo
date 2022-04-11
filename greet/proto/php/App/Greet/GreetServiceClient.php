@@ -1,7 +1,7 @@
 <?php
 // GENERATED CODE -- DO NOT EDIT!
 
-namespace App\Calculator;
+namespace App\Greet;
 
 /**
  */
@@ -18,31 +18,31 @@ class GreetServiceClient extends \Grpc\BaseStub {
 
     /**
      * Unary
-     * @param \App\Calculator\GreetRequest $argument input argument
+     * @param \App\Greet\GreetRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function Greet(\App\Calculator\GreetRequest $argument,
+    public function Greet(\App\Greet\GreetRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/greet.GreetService/Greet',
         $argument,
-        ['\App\Calculator\GreetResponse', 'decode'],
+        ['\App\Greet\GreetResponse', 'decode'],
         $metadata, $options);
     }
 
     /**
      * Server streaming
-     * @param \App\Calculator\GreetManyTimesRequest $argument input argument
+     * @param \App\Greet\GreetManyTimesRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\ServerStreamingCall
      */
-    public function GreetManyTimes(\App\Calculator\GreetManyTimesRequest $argument,
+    public function GreetManyTimes(\App\Greet\GreetManyTimesRequest $argument,
       $metadata = [], $options = []) {
         return $this->_serverStreamRequest('/greet.GreetService/GreetManyTimes',
         $argument,
-        ['\App\Calculator\GreetManyTimesResponse', 'decode'],
+        ['\App\Greet\GreetManyTimesResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -54,7 +54,7 @@ class GreetServiceClient extends \Grpc\BaseStub {
      */
     public function LongGreet($metadata = [], $options = []) {
         return $this->_clientStreamRequest('/greet.GreetService/LongGreet',
-        ['\App\Calculator\LongGreetResponse','decode'],
+        ['\App\Greet\LongGreetResponse','decode'],
         $metadata, $options);
     }
 
@@ -66,7 +66,7 @@ class GreetServiceClient extends \Grpc\BaseStub {
      */
     public function GreetAll($metadata = [], $options = []) {
         return $this->_bidiRequest('/greet.GreetService/GreetAll',
-        ['\App\Calculator\GreetAllResponse','decode'],
+        ['\App\Greet\GreetAllResponse','decode'],
         $metadata, $options);
     }
 

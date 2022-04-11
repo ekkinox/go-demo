@@ -2,7 +2,7 @@ syntax="proto3";
 
 package greet;
 option go_package="github.com/ekkinox/go-grpc/greet/proto/greet";
-option php_namespace = "App\\Calculator";
+option php_namespace = "App\\Greet";
 option php_metadata_namespace = "App\\GPBMetadata";
 
 message Greeting {
