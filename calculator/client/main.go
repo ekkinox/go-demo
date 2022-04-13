@@ -5,8 +5,11 @@ import (
 	"fmt"
 	calculatorPb "github.com/ekkinox/go-grpc/calculator/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"io"
 	"log"
+	"time"
 )
 
 func main() {
@@ -20,10 +23,11 @@ func main() {
 
 	c := calculatorPb.NewCalculatorServiceClient(conn)
 
-	//doSum(c)
+	doSum(c)
 	//doPrimeNumberDecomposition(c)
 	//doComputeAverage(c)
-	doFindMax(c)
+	//doFindMax(c)
+	//doSqrt(c)
 }
 
 func doSum(c calculatorPb.CalculatorServiceClient) {
@@ -32,7 +36,26 @@ func doSum(c calculatorPb.CalculatorServiceClient) {
 		Integer2: 3,
 	}
 
-	sum, _ := c.Sum(context.Background(), req)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	sum, err := c.Sum(ctx, req)
+
+	if err != nil {
+
+		err, ok := status.FromError(err)
+
+		if ok {
+			// user error
+			if err.Code() == codes.DeadlineExceeded {
+				log.Fatalf("timeout: %v", err.Message())
+			} else {
+				log.Fatalf("error %v", err)
+			}
+		} else {
+			log.Fatalf("error %v", err)
+		}
+	}
 
 	fmt.Printf("Calculator result: %v", sum.Result)
 }
@@ -154,4 +177,28 @@ func doFindMax(c calculatorPb.CalculatorServiceClient) {
 	}()
 
 	<-wait
+}
+
+func doSqrt(c calculatorPb.CalculatorServiceClient) {
+
+	number := int32(-10)
+
+	req := &calculatorPb.SqrtRequest{
+		Number: number,
+	}
+
+	resp, err := c.Sqrt(context.Background(), req)
+
+	if err != nil {
+		err, ok := status.FromError(err)
+
+		if ok {
+			// user error
+			log.Fatalf("user error message: %v, code: %v", err.Message(), err.Code())
+		} else {
+			log.Fatalf("error: %v", err)
+		}
+	}
+
+	fmt.Printf("Sqrt of %v = %v", number, resp.Sqrt)
 }

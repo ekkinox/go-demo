@@ -3,9 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"io"
 	"log"
+	"math"
 	"net"
+	"time"
 
 	calculatorPb "github.com/ekkinox/go-grpc/calculator/proto"
 	"google.golang.org/grpc"
@@ -18,6 +22,16 @@ type server struct {
 func (*server) Sum(ctx context.Context, req *calculatorPb.Request) (*calculatorPb.Response, error) {
 
 	log.Printf("Operation: SUM, %v", req)
+
+	for i := 0; i < 3; i++ {
+
+		if ctx.Err() == context.Canceled {
+			log.Printf("client cancelled")
+			return nil, status.Errorf(codes.Canceled, "client cancelled")
+		}
+
+		time.Sleep(1 * time.Second)
+	}
 
 	return &calculatorPb.Response{
 		Result: req.GetInteger1() + req.GetInteger2(),
@@ -99,6 +113,18 @@ func (*server) ComputeAverage(stream calculatorPb.CalculatorService_ComputeAvera
 		sum += req.GetNumber()
 		iter++
 	}
+}
+
+func (*server) Sqrt(ctx context.Context, req *calculatorPb.SqrtRequest) (*calculatorPb.SqrtResponse, error) {
+	number := req.GetNumber()
+
+	if number < 0 {
+		return nil, status.Errorf(codes.InvalidArgument, fmt.Sprintf("Invalid arguement :%v", number))
+	}
+
+	return &calculatorPb.SqrtResponse{
+		Sqrt: float32(math.Sqrt(float64(number))),
+	}, nil
 }
 
 func main() {
