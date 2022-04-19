@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package blog;
+
+option go_package = "github.com/ekkinox/go-grpc/blog/proto";
+
+import "google/protobuf/empty.proto";
+
+message Blog {
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+}
+
+message BlogId {
+  string id = 1;
+}
+
+service BlogService {
+  rpc List (google.protobuf.Empty) returns (stream Blog);
+  rpc Read (BlogId) returns (Blog);
+  rpc Create (Blog) returns (BlogId);
+  rpc Update (Blog) returns (google.protobuf.Empty);
+  rpc Delete (Blog) returns (google.protobuf.Empty);
+}
