@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/credentials"
 	"io"
 	"log"
 	"time"
@@ -14,7 +15,18 @@ import (
 func main() {
 	fmt.Println("Starting gRPC client on :50051 ...")
 
-	conn, err := grpc.Dial(":50051", grpc.WithInsecure())
+	opts := []grpc.DialOption{}
+
+	tls := true
+	if tls {
+		creds, err := credentials.NewClientTLSFromFile("../../ssl/ca.crt", "")
+		if err != nil {
+			log.Fatalf("error during client creds: %v", err)
+		}
+		opts = append(opts, grpc.WithTransportCredentials(creds))
+	}
+
+	conn, err := grpc.Dial(":50051", opts...)
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}

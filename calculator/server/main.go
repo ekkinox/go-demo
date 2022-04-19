@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 	"io"
 	"log"
@@ -137,6 +138,7 @@ func main() {
 
 	s := grpc.NewServer()
 	calculatorPb.RegisterCalculatorServiceServer(s, &server{})
+	reflection.Register(s)
 
 	err = s.Serve(lis)
 	if err != nil {

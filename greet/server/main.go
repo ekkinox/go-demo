@@ -10,6 +10,8 @@ import (
 
 	greetPb "github.com/ekkinox/go-grpc/greet/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/reflection"
 )
 
 type server struct {
@@ -107,8 +109,20 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
-	s := grpc.NewServer()
+	opts := []grpc.ServerOption{}
+
+	tls := true
+	if tls {
+		creds, err := credentials.NewServerTLSFromFile("../../ssl/server.crt", "../../ssl/server.pem")
+		if err != nil {
+			log.Fatalf("error loading certs: %v", err)
+		}
+		opts = append(opts, grpc.Creds(creds))
+	}
+
+	s := grpc.NewServer(opts...)
 	greetPb.RegisterGreetServiceServer(s, &server{})
+	reflection.Register(s)
 
 	err = s.Serve(lis)
 	if err != nil {
